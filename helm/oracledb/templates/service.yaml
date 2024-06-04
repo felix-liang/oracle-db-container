@@ -6,9 +6,14 @@ metadata:
 spec:
   type: {{ .Values.service.type }}
   ports:
-    - port: {{ .Values.service.port }}
+    - port: 1521
       targetPort: 1521
       protocol: TCP
       name: oracle-port
+
+    - port: 2484
+      targetPort: 2484
+      protocol: TCP
+      name: oracle-port-ssl
   selector:
     app: {{ .Release.Name }}-oracledb

@@ -14,6 +14,5 @@ storage:
 
 service:
   type: ClusterIP
-  port: 1521
 
 

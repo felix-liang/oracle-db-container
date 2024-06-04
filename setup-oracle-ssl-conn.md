@@ -1,6 +1,6 @@
 # Setup Oracle SSL configrations
 
-## Prepare the certificates
+## Prepare the certificates (Optional - Predefined certs are under ssl)
 
 ### Generate CA Private Key
 
