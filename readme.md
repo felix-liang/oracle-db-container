@@ -13,3 +13,12 @@ Please check and modify the configuration in `helm/oracledb/values.yaml`.
 ```
 helm install myoracledb  helm/oracledb
 ```
+
+It take several minutes to initlize the Oracle DB instance.
+
+## Set up SSL connection for Oracle
+
+If you want to use SSL connection, please refer to the `setup-oracle-ssl-conn.md`.
+
+* The CA certificate and truststore can be found under `ssl` folder.
+

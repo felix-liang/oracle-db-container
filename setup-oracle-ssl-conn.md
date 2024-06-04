@@ -30,18 +30,6 @@ openssl req -new -key server.key -out server.csr -passin pass:Pass98761d!
 openssl x509 -req -in server.csr -CA ca.crt -CAkey ca.key -CAcreateserial -out server.crt -days 3650 -sha256 -extensions v3_req -passin  pass:Pass2341d!
 ```
 
-### Create private key and certificate
-
-```
-openssl req -newkey rsa:2048 -nodes -keyout server.key -x509 -days 365 -out server.crt
-```
-
-### Convert the server.crt and server.key to P12 format
-
-```
-openssl pkcs12 -export -in server.crt -inkey server.key -out server.p12 -name "server-cert" -passout pass:YourPKCS12Password
-```
-
 
 ## Set up Oracle Wallet for SSL
 
