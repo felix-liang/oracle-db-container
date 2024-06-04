@@ -1,0 +1,59 @@
+kind: StatefulSet
+apiVersion: apps/v1
+metadata:
+  name: {{ .Release.Name }}-oracle-db
+  namespace: {{ .Release.Namespace }}
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: {{ .Release.Name }}-oracledb
+  serviceName: {{ .Release.Name }}-oracledb-svc
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        app: {{ .Release.Name }}-oracledb
+    spec:
+      volumes:
+        - name: database
+          persistentVolumeClaim:
+            claimName: {{ .Release.Name }}-pvc-oracle
+      initContainers:
+      - name: init-permissions
+        image: busybox
+        command: ["sh", "-c", "chown -R 54321 /opt/oracle/oradata && echo "]
+        volumeMounts:
+        - name: database
+          mountPath: /opt/oracle/oradata            
+      containers:
+        - resources:
+            limits:
+              cpu: '4'
+              memory: 8G
+            requests:
+              cpu: '1'
+              memory: 4G
+          name: oracle
+          env:
+            - name: ORACLE_PWD
+              value: Passw0rd
+          volumeMounts:
+            - name: database
+              mountPath: /opt/oracle/oradata                  
+          securityContext:
+            allowPrivilegeEscalation: true
+            runAsUser: 54321
+          ports:
+            - containerPort: 1521
+              protocol: TCP
+          imagePullPolicy: Always
+
+          terminationMessagePolicy: File
+          image: {{ .Values.imageUrl}}
+      serviceAccount: {{ .Release.Name }}-oracledb-sa
+      restartPolicy: Always
+      terminationGracePeriodSeconds: 30
+      dnsPolicy: ClusterFirst
+      securityContext: {}
+      schedulerName: default-scheduler

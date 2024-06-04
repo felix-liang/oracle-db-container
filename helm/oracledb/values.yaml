@@ -1,0 +1,19 @@
+# Default values for Oracle DB.
+# This is a YAML-formatted file.
+# Declare variables to be passed into your templates.
+
+namespace: test
+
+imageUrl: container-registry.oracle.com/database/express:21.3.0-xe
+
+# The storage configuration
+storage:
+  # ROKS on IBM Cloud, please use ibmc-block-gold, there seems to be some issue with NFS
+  storageClassName: ocs-storagecluster-cephfs
+  size: 100Gi
+
+service:
+  type: ClusterIP
+  port: 1521
+
+
