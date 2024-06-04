@@ -14,7 +14,7 @@ Please check and modify the configuration in `helm/oracledb/values.yaml`.
 helm install myoracledb  helm/oracledb
 ```
 
-It take several minutes to initlize the Oracle DB instance.
+It take several minutes to initialize the Oracle DB instance.
 
 ## Set up SSL connection for Oracle
 
@@ -26,7 +26,7 @@ If you want to use SSL connection, please refer to the `setup-oracle-ssl-conn.md
 
 ## Create User in Oracle
 
-** The default password for `sys` is `Passw0rd` **
+== The default password for `sys` is `Passw0rd` ==
 
 - Login to the Oracle pod console
 - Run the scripts below.
